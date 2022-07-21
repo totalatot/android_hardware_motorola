@@ -23,7 +23,7 @@
         android:title="@string/ambient_display_enable_summary"/>
 
     <com.android.settingslib.widget.MainSwitchPreference
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:key="doze_enable"
         android:title="@string/ambient_display_enable_title" />
 
