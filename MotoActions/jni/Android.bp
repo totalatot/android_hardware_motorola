@@ -1,0 +1,13 @@
+cc_library_shared {
+    name: "libjni_MotoActions",
+    srcs: ["jni_MotoActions.c"],
+    shared_libs: [
+        "libcutils",
+        "liblog",
+    ],
+    vendor: true,
+    header_libs: [
+        "jni_headers",
+        "generated_kernel_headers",
+    ],
+}
