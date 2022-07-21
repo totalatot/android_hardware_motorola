@@ -36,6 +36,8 @@ public class SensorHelper {
     private static final int SENSOR_TYPE_MMI_FLAT_UP = 65537;
     private static final int SENSOR_TYPE_MMI_FLAT_DOWN = 65538;
     private static final int SENSOR_TYPE_MMI_STOW = 65539;
+    private static final int SENSOR_TYPE_MMI_IR_GESTURE = 65541;
+    private static final int SENSOR_TYPE_MMI_IR_OBJECT = 65543;
 
     private static final int BATCH_LATENCY_IN_MS = 100;
 
@@ -79,6 +81,10 @@ public class SensorHelper {
 
     public Sensor getFlatDownSensor() {
         return mSensorManager.getDefaultSensor(SENSOR_TYPE_MMI_FLAT_DOWN, true);
+    }
+
+    public Sensor getIrGestureSensor() {
+        return mSensorManager.getDefaultSensor(SENSOR_TYPE_MMI_IR_GESTURE, true);
     }
 
     public Sensor getProximitySensor() {
