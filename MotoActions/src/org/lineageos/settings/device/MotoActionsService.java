@@ -33,6 +33,8 @@ import org.lineageos.settings.device.actions.ProximitySilencer;
 import org.lineageos.settings.device.actions.UpdatedStateNotifier;
 import org.lineageos.settings.device.doze.DozePulseAction;
 import org.lineageos.settings.device.doze.FlatUpSensor;
+import org.lineageos.settings.device.IrGestureManager;
+import org.lineageos.settings.device.doze.IrGestureSensor;
 import org.lineageos.settings.device.doze.ScreenStateNotifier;
 import org.lineageos.settings.device.doze.StowSensor;
 
@@ -46,6 +48,7 @@ public class MotoActionsService extends Service implements ScreenStateNotifier,
     private final List<ScreenStateNotifier> mScreenStateNotifiers = new LinkedList<>();
     private final List<UpdatedStateNotifier> mUpdatedStateNotifiers = new LinkedList<>();
 
+    private IrGestureManager mIrGestureManager;
     private PowerManager mPowerManager;
     private PowerManager.WakeLock mWakeLock;
 
@@ -55,12 +58,13 @@ public class MotoActionsService extends Service implements ScreenStateNotifier,
         MotoActionsSettings actionsSettings = new MotoActionsSettings(this, this);
         SensorHelper sensorHelper = new SensorHelper(this);
         DozePulseAction dozePulseAction = new DozePulseAction(this);
-
+        mIrGestureManager = new IrGestureManager();
         mScreenStateNotifiers.add(dozePulseAction);
 
         // Actionable sensors get screen on/off notifications
         mScreenStateNotifiers.add(new StowSensor(actionsSettings, sensorHelper, dozePulseAction));
         mScreenStateNotifiers.add(new FlatUpSensor(actionsSettings, sensorHelper, dozePulseAction));
+        mScreenStateNotifiers.add(new IrGestureSensor(actionsSettings, sensorHelper, dozePulseAction, mIrGestureManager));
 
         // Other actions that are always enabled
         mUpdatedStateNotifiers.add(new ChopChopSensor(actionsSettings, sensorHelper));
