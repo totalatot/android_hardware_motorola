@@ -28,6 +28,7 @@ import android.util.Log;
 
 import org.lineageos.settings.device.actions.ChopChopSensor;
 import org.lineageos.settings.device.actions.FlipToMute;
+import org.lineageos.settings.device.actions.IrSilencer;
 import org.lineageos.settings.device.actions.LiftToSilence;
 import org.lineageos.settings.device.actions.ProximitySilencer;
 import org.lineageos.settings.device.actions.UpdatedStateNotifier;
@@ -68,6 +69,7 @@ public class MotoActionsService extends Service implements ScreenStateNotifier,
 
         // Other actions that are always enabled
         mUpdatedStateNotifiers.add(new ChopChopSensor(actionsSettings, sensorHelper));
+        mUpdatedStateNotifiers.add(new IrSilencer(actionsSettings, this, sensorHelper, mIrGestureManager));
         mUpdatedStateNotifiers.add(new ProximitySilencer(actionsSettings, this, sensorHelper));
         mUpdatedStateNotifiers.add(new FlipToMute(actionsSettings, this, sensorHelper));
         mUpdatedStateNotifiers.add(new LiftToSilence(actionsSettings, this, sensorHelper));
